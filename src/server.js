@@ -11,8 +11,14 @@ import authRoutes from './routes/authRoutes.js'
 import { notFound, errorHandler } from './middleware/errorHandler.js'
 
 // ── Connect to MongoDB ────────────────────────────────────────────────────────
-await connectDB()
 
+try {
+  await connectDB()
+  console.log("MongoDB connected")
+} catch (err) {
+  console.error("MongoDB connection failed:", err.message)
+  process.exit(1)
+}
 const app = express()
 
 // ── Security & CORS ───────────────────────────────────────────────────────────
